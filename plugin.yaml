@@ -1,0 +1,6 @@
+plugin:
+    name: 'acorn.backendlocalization::lang.plugin.name'
+    description: 'acorn.backendlocalization::lang.plugin.description'
+    author: acorn
+    icon: oc-icon-adjust
+    homepage: ''
