@@ -1,6 +1,6 @@
 <?php
 
-namespace Acorn\Backendlocalization\Class;
+namespace AcornAssociated\Backendlocalization\Class;
 
 use Winter\Storm\Database\Builder;
 
@@ -10,10 +10,10 @@ use Winter\Storm\Database\Builder;
  * @use
  * on Class add
  *
- * use Acorn\Backendlocalization\Class\LoadRelation;
+ * use AcornAssociated\Backendlocalization\Class\LoadRelation;
  *
  *  @author JaberRasul
- *  @package Acorn
+ *  @package AcornAssociated
  */
 
 trait LoadRelation
