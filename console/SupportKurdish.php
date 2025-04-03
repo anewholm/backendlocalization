@@ -31,7 +31,7 @@ class SupportKurdish extends Command
     /**
      * @var string The console command description.
      */
-    protected $description = 'No description provided yet...';
+    protected $description = 'Install Kurdish language files for Winter modules';
 
     /**
      * Execute the console command.
