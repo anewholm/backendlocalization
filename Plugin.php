@@ -1,6 +1,6 @@
 <?php
 
-namespace Acorn\BackendLocalization;
+namespace AcornAssociated\BackendLocalization;
 
 use Backend;
 use Backend\Controllers\Preferences;
@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\URL;
 /**
  * localization Plugin Information File
  * @author Jaber Rasul
- * @package Acorn
+ * @package AcornAssociated
  */
 class Plugin extends PluginBase
 {
@@ -30,9 +30,9 @@ class Plugin extends PluginBase
     public function pluginDetails(): array
     {
         return [
-            'name'        => 'acorn.backendlocalization::lang.plugin.name',
-            'description' => 'acorn.backendlocalization::lang.plugin.description',
-            'author'      => 'Acorn',
+            'name'        => 'acornassociated.backendlocalization::lang.plugin.name',
+            'description' => 'acornassociated.backendlocalization::lang.plugin.description',
+            'author'      => 'Acorn Associated',
             'icon'        => 'icon-leaf'
         ];
     }
@@ -42,7 +42,7 @@ class Plugin extends PluginBase
      */
     public function register()
     {
-        $this->registerConsoleCommand('support:kurdish', \Acorn\BackendLocalization\Console\SupportKurdish::class);
+        $this->registerConsoleCommand('support:kurdish', \AcornAssociated\BackendLocalization\Console\SupportKurdish::class);
     }
 
     /**
@@ -123,7 +123,7 @@ class Plugin extends PluginBase
         // Preferences::extend(function ($controller) {
 
         //     // Add custom JavaScript file to the controller.
-        //     $controller->addJs(URL::asset('plugins/acorn/backendlocalization/assets/js.js'));
+        //     $controller->addJs(URL::asset('plugins/acornassociated/backendlocalization/assets/js.js'));
 
         //     // Add a dynamic method 'onNewResetDefault' to reset the default locale to 'en'.
         //     $controller->addDynamicMethod('onNewResetDefault', function () use ($controller) {
@@ -168,7 +168,7 @@ class Plugin extends PluginBase
                     'label' => "backend::lang.backend_preferences.locale",
                     'comment' => "backend::lang.backend_preferences.locale_comment",
                     'type' => 'dropdown',
-                    'options' => '\Acorn\Backendlocalization\Plugin::getAcornOptions',
+                    'options' => '\AcornAssociated\Backendlocalization\Plugin::getAcornAssociatedOptions',
                     'tab'   => "backend::lang.backend_preferences.region",
                     'span' => 'left',
                 ]
@@ -189,11 +189,11 @@ class Plugin extends PluginBase
         });
     }
 
-    public static function getAcornOptions(){
+    public static function getAcornAssociatedOptions(){
         $localeOptions = [
             'ar'    => [Lang::get('system::lang.locale.ar'),    'flag-sa'],
             'en'    => [Lang::get('system::lang.locale.en'),    'flag-us'],
-            'ku'    => [Lang::get('acorn.backendlocalization::lang.plugin.kurdish'),    'flag-ir'],
+            'ku'    => [Lang::get('acornassociated.backendlocalization::lang.plugin.kurdish'),    'flag-ir'],
         ];
 
         $locales = Config::get('app.localeOptions', $localeOptions);

@@ -5,7 +5,7 @@ This plugin integrates the Winter package wn-translate-plugin  with the backend
 
 ## Installation
 
-You can install the plugin using gitlab acorn.
+You can install the plugin using gitlab acornassociated.
 
 # Install wn-translate-plugin
 ```bash
@@ -15,7 +15,7 @@ composer require winter/wn-translate-plugin; php artisan winter:up;
 # Install BackendLocalization
 
 ```bash
-cd plugins/ ; mkdir -p acorn ; cd acorn ; git clone git@gitlab.acorn.org:office/backendlocalization.git ; cd ../../;
+cd plugins/ ; mkdir -p acornassociated ; cd acornassociated ; git clone git@gitlab.acornassociated.org:office/backendlocalization.git ; cd ../../;
 ```
 ## TranslateBackend Class
 
@@ -27,10 +27,10 @@ cd plugins/ ; mkdir -p acorn ; cd acorn ; git clone git@gitlab.acorn.org:office/
 
     ```sh  <?php
 
-    namespace Acorn\Backendlocalization\Models;
+    namespace AcornAssociated\Backendlocalization\Models;
 
     use Model;
-    use Acorn\Backendlocalization\Class\TranslateBackend;
+    use AcornAssociated\Backendlocalization\Class\TranslateBackend;
 
     class YourModel extends Model
     {
