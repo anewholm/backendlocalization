@@ -1,10 +1,10 @@
 <?php
 
-namespace AcornAssociated\Backendlocalization\Class;
+namespace Acorn\Backendlocalization\Class;
 
 use Lang;
 use Request;
-use \AcornAssociated\BackendRequestController;
+use \Acorn\BackendRequestController;
 
 /**
  *
@@ -25,12 +25,12 @@ use \AcornAssociated\BackendRequestController;
  *  public $implement = ['Winter.Translate.Behaviors.TranslatableModel'];
  *  public $translatable = ['name'];
  *
- *  use AcornAssociated\Backendlocalization\Class\TranslateBackend;
+ *  use Acorn\Backendlocalization\Class\TranslateBackend;
  *
  *
  *
  * @author Jaber Rasul
- * @package AcornAssociated
+ * @package Acorn
  *
  */
 

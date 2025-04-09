@@ -1,5 +1,5 @@
 {
-  "name": "acornassociated/backendlocalization",
+  "name": "acorn/backendlocalization",
   "type": "winter-plugin",
   "require": {
     "composer/installers": "~1.0",

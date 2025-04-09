@@ -1,6 +1,6 @@
 <?php
 
-namespace AcornAssociated\BackendLocalization\Console;
+namespace Acorn\BackendLocalization\Console;
 
 use File;
 use Winter\Storm\Console\Command;
@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Storage;
  * use command
  *  php artisan support:kurdish
  * @author Jaber Rasul
- * @package AcornAssociated
+ * @package Acorn
  */
 class SupportKurdish extends Command
 {
@@ -69,7 +69,7 @@ class SupportKurdish extends Command
     public function MakeLangFileJsDatePicker(): void{
 
         $BackendFileJsKurdishPathOne = base_path('modules/system/assets/js/lang');
-        $pluginFileJsKurdishPathOne = plugins_path("acornassociated/backendlocalization/console/file_backend_system_lang/lang.ku.js");
+        $pluginFileJsKurdishPathOne = plugins_path("acorn/backendlocalization/console/file_backend_system_lang/lang.ku.js");
 
         File::delete(str_finish($BackendFileJsKurdishPathOne, '/lang.ku.js'));
 
@@ -99,9 +99,9 @@ class SupportKurdish extends Command
 
     public function MakeDirectoryKuONBackend(): void
     {
-        $backendPluginLangPath = plugins_path('acornassociated/backendlocalization/console/file_backend_system_lang/backend/ku');
+        $backendPluginLangPath = plugins_path('acorn/backendlocalization/console/file_backend_system_lang/backend/ku');
         $backendLangPath = base_path('modules/backend/lang/ku');
-        $systemPluginLangPath = plugins_path('acornassociated/backendlocalization/console/file_backend_system_lang/system/ku');
+        $systemPluginLangPath = plugins_path('acorn/backendlocalization/console/file_backend_system_lang/system/ku');
         $systemLangPath = base_path('modules/system/lang/ku');
 
         if (!File::exists($backendLangPath)) {
@@ -133,8 +133,8 @@ class SupportKurdish extends Command
 
         $BackendFlagIconKurdishPathOne = base_path('modules/system/assets/ui/vendor/flag-icon/flags/1x1');
         $BackendFlagIconKurdishPathFour = base_path('modules/system/assets/ui/vendor/flag-icon/flags/4x3');
-        $pluginFlagIconKurdishPathOne = plugins_path("acornassociated/backendlocalization/console/flags/1x1/ir.svg");
-        $pluginFlagIconKurdishPathFour = plugins_path("acornassociated/backendlocalization/console/flags/4x3/ir.svg");
+        $pluginFlagIconKurdishPathOne = plugins_path("acorn/backendlocalization/console/flags/1x1/ir.svg");
+        $pluginFlagIconKurdishPathFour = plugins_path("acorn/backendlocalization/console/flags/4x3/ir.svg");
 
         File::delete(str_finish($BackendFlagIconKurdishPathOne, '/ir.svg'));
         File::delete(str_finish($BackendFlagIconKurdishPathFour, '/ir.svg'));
