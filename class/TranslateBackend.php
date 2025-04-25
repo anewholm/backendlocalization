@@ -43,14 +43,25 @@ trait TranslateBackend
      */
      public function __get($name)
      {
+         // FormField::getFieldNameFromData():
+         // 2 ways:
+         // Storm\Model::__isset(key) 
+         // => HasAttributes::getAttribute(key) 
+         // => HasAttributes::getAttributeValue(key)
+         // This works: $name = $result->getAttribute($key);
+         // 
+         // AA\Model::__get(key) 
+         // => TranslatableBehavior::getAttributeTranslated(key, locale) 
+         // => TranslatableBehavior::getAttributeFromData(data, key) where data is 
+         //   this $this->model->attributes, not the target model
+         // TODO: Apply to 1-1 relations
          if (in_array($name, $this->translatable)) {
-            if (BackendRequestController::isUpdate()) {
-                // TODO: Shouldn't this be the default locale?
-                return $this->getAttributeTranslated($name, 'en');
-            } else {
-                return $this->getAttributeTranslated($name, Lang::getLocale());
-            }
+            // TODO: Initialise the Translateable control to the backend users locale
+            $value = $this->getAttributeTranslated($name, Lang::getLocale());
+         } else {
+            $value = parent::__get($name);
          }
-         return parent::__get($name);
+
+         return $value;
      }
 }
