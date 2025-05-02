@@ -5,6 +5,8 @@ namespace Acorn\Backendlocalization\Class;
 use Lang;
 use Request;
 use \Acorn\BackendRequestController;
+use Exception;
+use Illuminate\Support\Str;
 
 /**
  *
@@ -33,6 +35,7 @@ use \Acorn\BackendRequestController;
  * @package Acorn
  *
  */
+// TODO: Input Language control dropdown => backend users locale
 
 trait TranslateBackend
 {
@@ -43,21 +46,27 @@ trait TranslateBackend
      */
      public function __get($name)
      {
-         // FormField::getFieldNameFromData():
-         // 2 ways:
-         // Storm\Model::__isset(key) 
-         // => HasAttributes::getAttribute(key) 
-         // => HasAttributes::getAttributeValue(key)
-         // This works: $name = $result->getAttribute($key);
-         // 
-         // AA\Model::__get(key) 
-         // => TranslatableBehavior::getAttributeTranslated(key, locale) 
-         // => TranslatableBehavior::getAttributeFromData(data, key) where data is 
-         //   this $this->model->attributes, not the target model
-         // TODO: Apply to 1-1 relations
+         // FormField::getFieldNameFromData() uses 2 ways:
+         //   Storm\Model::__isset(key) 
+         //     => HasAttributes::getAttribute(key) 
+         //     => HasAttributes::getAttributeValue(key)
+         //     this works: $name = $result->getAttribute($key);
+         //   AA\Model::__get(key) 
+         //     => TranslatableBehavior::getAttributeTranslated(key, locale) 
+         //     => TranslatableBehavior::getAttributeFromData(data, key) where data is 
+         //     this $this->model->attributes, not the target model
          if (in_array($name, $this->translatable)) {
-            // TODO: Initialise the Translateable control to the backend users locale
-            $value = $this->getAttributeTranslated($name, Lang::getLocale());
+            if ($this->hasGetMutator($name)) {
+               // Copied from hasGetMutator()
+               $method = 'get'.Str::studly($name).'Attribute';
+               $value  = $this->$method();
+            } else if ($this->hasAttributeMutator($name)) {
+               throw new Exception("TranslateBackend: AttributeMutator not supported for __get($name)");
+            } else if ($this->isClassCastable($name)) {
+               throw new Exception("TranslateBackend: ClassCastable not supported for __get($name)");
+            } else {
+               $value = $this->getAttributeTranslated($name, Lang::getLocale());
+            }
          } else {
             $value = parent::__get($name);
          }
