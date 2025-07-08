@@ -9,8 +9,8 @@ use Exception;
 use Illuminate\Support\Str;
 
 /**
- *
- * It does this algorithmically by dynamically translating the fields using the winter package winter/wn-translate-plugin
+ * It does this algorithmically by dynamically translating the fields 
+ * using the winter package winter/wn-translate-plugin
  *
  * @requires
  * Install Winter Translate
@@ -20,16 +20,11 @@ use Illuminate\Support\Str;
  * Or
  * @see https://github.com/wintercms/wn-translate-plugin
  *
- *
- *
  * @use
- *
  *  public $implement = ['Winter.Translate.Behaviors.TranslatableModel'];
  *  public $translatable = ['name'];
  *
  *  use Acorn\Backendlocalization\Class\TranslateBackend;
- *
- *
  *
  * @author Jaber Rasul
  * @package Acorn

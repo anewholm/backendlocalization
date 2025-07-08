@@ -1,3 +1,5 @@
 '1.0.0':
-    - 'Create special languages ​​for the backend '
+    - 'Create special languages ​​for the backend'
     - v1.1/seed_locale_backend.php
+    - 'Add translate unique constraints'
+    - v1.1/add_translate_uniques.php

@@ -26,14 +26,12 @@ trait LoadRelation
     protected static function booted(): void
     {
         $instance = new static;
+        
         $belongsToRelaion = array_keys(array_filter($instance->belongsTo, function ($item) {
-            if (isset($item['load'])) {
-                return $item['load'] == true;
-            } else {
-                return false;
-            }
+            return (isset($item['load']) && $item['load']);
         }));
-        if (isset($belongsToRelaion) && !empty($belongsToRelaion)) {
+
+        if ($belongsToRelaion) {
             static::addGlobalScope('loadRelation', function (Builder $builder) use ($belongsToRelaion) {
                 $builder->with($belongsToRelaion);
             });

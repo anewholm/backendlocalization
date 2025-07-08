@@ -51,19 +51,13 @@ class Plugin extends PluginBase
     public function boot(): void
     {
         // Extend the Locale model to make 'name', 'code', 'is_default', and 'is_enabled' attributes fillable.
-
         $this->extendAttributesFillable();
 
         // Extend the Preference model to update session locale and fallback_locale after saving.
-
         $this->extendPreferenceModelAfterSaving();
 
-
         // Extend the Preferences controller to add custom JavaScript and a dynamic method for resetting the default locale.
-
         $this->extendPreferencesControllerDefaultLocale();
-
-
 
         // Extend the form fields of the Preferences controller to customize the 'locale' and 'timezone' fields.
         $this->extendFieldsPreferencesController();
@@ -155,7 +149,6 @@ class Plugin extends PluginBase
     private function extendFieldsPreferencesController(): void
     {
         Preferences::extendFormFields(function ($form, $model, $context) {
-
             // Check if the model is an instance of Preference.
             if (!$model instanceof Preference) {
                 return;
