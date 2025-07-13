@@ -50,7 +50,8 @@ trait TranslateBackend
          //     => TranslatableBehavior::getAttributeTranslated(key, locale) 
          //     => TranslatableBehavior::getAttributeFromData(data, key) where data is 
          //     this $this->model->attributes, not the target model
-         if (in_array($name, $this->translatable)) {
+         $isUpdate = BackendRequestController::isUpdate();
+         if (!$isUpdate && in_array($name, $this->translatable)) {
             if ($this->hasGetMutator($name)) {
                // Copied from hasGetMutator()
                $method = 'get'.Str::studly($name).'Attribute';
