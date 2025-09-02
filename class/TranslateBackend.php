@@ -52,6 +52,9 @@ trait TranslateBackend
          //     this $this->model->attributes, not the target model
          $isUpdate = BackendRequestController::isUpdate();
          if (!$isUpdate && in_array($name, $this->translatable)) {
+            // Seems to forget this further down the chain...
+            $this->translateContext(Lang::getLocale());
+
             if ($this->hasGetMutator($name)) {
                // Copied from hasGetMutator()
                $method = 'get'.Str::studly($name).'Attribute';
@@ -61,7 +64,7 @@ trait TranslateBackend
             } else if ($this->isClassCastable($name)) {
                throw new Exception("TranslateBackend: ClassCastable not supported for __get($name)");
             } else {
-               $value = $this->getAttributeTranslated($name, Lang::getLocale());
+               $value = $this->getAttributeTranslated($name);
             }
          } else {
             $value = parent::__get($name);
