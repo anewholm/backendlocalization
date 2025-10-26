@@ -50,7 +50,12 @@ trait TranslateBackend
          //     => TranslatableBehavior::getAttributeTranslated(key, locale) 
          //     => TranslatableBehavior::getAttributeFromData(data, key) where data is 
          //     this $this->model->attributes, not the target model
-         $isUpdate = BackendRequestController::isUpdate();
+         //
+         // TODO: Use BackendRequestController::isUpdate(); with the requested controller
+         // This does not work: BackendRequestController::isUpdate();
+         // because findController() will only return the existing controller
+         // which is apparently NULL for updates. Why??
+         $isUpdate = strstr(Request::url(), '/update/'); 
          if (!$isUpdate && in_array($name, $this->translatable)) {
             // Seems to forget this further down the chain...
             $this->translateContext(Lang::getLocale());
