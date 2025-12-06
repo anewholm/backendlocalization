@@ -255,8 +255,8 @@ return [
     ],
 
     'form' => [
-        'create_title' => 'Nû ',
-        'update_title' => 'Vê  Bêşînin',
+        'create_title' => 'Nû',
+        'update_title' => 'Vê Biguherîne',
         'preview_title' => 'Jor :name',
         'create_success' => ' hat çêkirin',
         'update_success' => ' hat nûvekirin',
@@ -344,8 +344,8 @@ return [
         'cancel' => 'Betal bike',
         'close' => 'Bigire',
         'add_name' => ':name zêde bike',
-        'create' => 'Biafirîne',
-        'create_name' => ':name biafirîne',
+        'create' => 'Zêde bike',
+        'create_name' => ':name zêde bike',
         'update' => 'Nûve bike',
         'update_name' => ':name nûve bike',
         'preview' => 'Pêşdîtin',
