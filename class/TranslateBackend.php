@@ -3,8 +3,9 @@
 namespace Acorn\Backendlocalization\Class;
 
 use Lang;
-use Request;
 use \Acorn\BackendRequestController;
+use Illuminate\Database\Eloquent\Collection;
+use Winter\Storm\Database\Model as WinterModel;
 use Exception;
 use Illuminate\Support\Str;
 
@@ -55,23 +56,43 @@ trait TranslateBackend
          // This does not work: BackendRequestController::isUpdate();
          // because findController() will only return the existing controller
          // which is apparently NULL for updates. Why??
-         $isUpdate = strstr(Request::url(), '/update/'); 
-         if (!$isUpdate && in_array($name, $this->translatable)) {
-            // Seems to forget this further down the chain...
-            $this->translateContext(Lang::getLocale());
+         //
+         // Calendar plugin uses ?mode=update as all its popups use the Calendars widget
+         // isUpdateMode() requires TranslatableModel
+         $translatableModel = $this->getClassExtension('Acorn.Behaviors.TranslatableModel');
+         if ($translatableModel) {
+            if ($this->isUpdateMode()) {
+               // Non-translated attribute because model is being used in an update form
+               $value = parent::__get($name);
+            } else if (in_array($name, $this->translatable)) {
+               // Translated attribute for normal backend translated display
+               // Seems to forget this further down the chain...
+               $this->translateContext(Lang::getLocale());
 
-            if ($this->hasGetMutator($name)) {
-               // Copied from hasGetMutator()
-               $method = 'get'.Str::studly($name).'Attribute';
-               $value  = $this->$method();
-            } else if ($this->hasAttributeMutator($name)) {
-               throw new Exception("TranslateBackend: AttributeMutator not supported for __get($name)");
-            } else if ($this->isClassCastable($name)) {
-               throw new Exception("TranslateBackend: ClassCastable not supported for __get($name)");
+               if ($this->hasGetMutator($name)) {
+                  // Copied from hasGetMutator()
+                  $method = 'get'.Str::studly($name).'Attribute';
+                  $value  = $this->$method();
+               } else if ($this->hasAttributeMutator($name)) {
+                  throw new Exception("TranslateBackend: AttributeMutator not supported for __get($name)");
+               } else if ($this->isClassCastable($name)) {
+                  throw new Exception("TranslateBackend: ClassCastable not supported for __get($name)");
+               } else {
+                  $value = $this->getAttributeTranslated($name);
+               }
             } else {
-               $value = $this->getAttributeTranslated($name);
+               // Not a translatable attribute
+               $value = parent::__get($name);
+            }
+
+            // Cascade updateMode|viewMode into sub-objects
+            if ($value instanceOf WinterModel) {
+               if ($translatableSubModel = $value->getClassExtension('Acorn.Behaviors.TranslatableModel')) {
+                  $translatableSubModel->copyUpdateModeFrom($translatableModel);
+               }
             }
          } else {
+            // Not a translatable model
             $value = parent::__get($name);
          }
 
